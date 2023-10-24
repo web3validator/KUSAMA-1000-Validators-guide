@@ -99,9 +99,8 @@ docker run -dit \
 --network host \
 -v $HOME/.kusama:/data -u $(id -u ${USER}):$(id -g ${USER}) \
 parity/polkadot --base-path /data --chain kusama \
---validator --name "web34ever-2" \
+--validator --name $MONIKER \
 --port 30533 \
---ws-port 9954 \
 --rpc-port 9953 \
 --prometheus-port 9655 \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 1' \
@@ -162,15 +161,14 @@ Copy code
 
 # run docker, pre-specifying the validator name <moniker>
 ```bash
-docker run -dit \  
+docker run -dit \
 --name kusama_node \
---restart always \ 
+--restart always \
 --network host \
--v $HOME/.kusama:/data -u $(id -u ${USER}):$(id -g ${USER}) \   
+-v $HOME/.kusama:/data -u $(id -u ${USER}):$(id -g ${USER}) \
 parity/polkadot --base-path /data --chain kusama \
---validator --name "<moniker>" \
---port 30533 \  
---ws-port 9954 \
+--validator --name $MONIKER \
+--port 30533 \
 --rpc-port 9953 \
 --prometheus-port 9655 \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 1' \

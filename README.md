@@ -177,7 +177,7 @@ https://polkachu.com/snapshots/kusama
 
 Copy code
 
-# снепшот от полкачу
+# snapshot from polkachu
 ```bash
 docker stop kusama_node
 ```
@@ -188,7 +188,7 @@ docker rm kusama_node
 curl -o - -L https://snapshots.polkachu.com/snapshots/kusama/kusama_16151324.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.kusama/chains/ksmcc3/
 ```
 
-# запускаем
+# run the node
 Useful commands
 Copy code
 
@@ -220,7 +220,7 @@ https://insights.math-crypto.com/kusama/DwZmVxujvVZmzmLZJ3wNTqyxBYTPDstCxayK6nwS
 https://kusama.polkastats.io/validator/DwZmVxujvVZmzmLZJ3wNTqyxBYTPDstCxayK6nwSR9HC1tS
 
 Deleting a node
-Copy code
+
 ```bash
 docker stop kusama_node
 ```

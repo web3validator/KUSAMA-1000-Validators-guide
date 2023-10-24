@@ -94,12 +94,12 @@ ufw allow 30533
 # run docker, pre-specifying the validator name <moniker>
 ```bash
 docker run -dit \
---name kusama_node \ 
---restart always \  
+--name kusama_node \
+--restart always \
 --network host \
 -v $HOME/.kusama:/data -u $(id -u ${USER}):$(id -g ${USER}) \
-parity/polkadot --base-path /data --chain kusama \   
---validator --name "web34ever-2" \ 
+parity/polkadot --base-path /data --chain kusama \
+--validator --name "web34ever-2" \
 --port 30533 \
 --ws-port 9954 \
 --rpc-port 9953 \

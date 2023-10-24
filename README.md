@@ -179,7 +179,7 @@ parity/polkadot --base-path /data --chain kusama \
 Updating (Auto)
 Snapshot
 
-https://polkachu.com/snapshots/kusama
+[https://polkachu.com/snapshots/kusama](https://polkachu.com/substrate_snapshots/kusama)
 
 Copy code
 

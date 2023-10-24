@@ -1,41 +1,47 @@
 # KUSAMA-1000-Validators-guide
-Guide how to install kusama node
-Steps to take action:
-Run a node
-Verify the main wallet that will stash through the registrar. To do this, you will need to lock an additional 0.33 KSM
-Waited for synchronization and staked at least 10 coins from your stash. Commission no more than 15%. Be sure to use a separate wallet for the controller
-Fill out the form and wait at least 6 days before appearing in official and unofficial leaderboards. After 7 days, nominations should begin
-Requirements:
-Validators should never be slashed
-Cannot be placed on Hetzner or Contabo
-Validators have a verified wallet account. For this, we use the registrar and this video
-Validators must have their own stake of at least 10 KSM
-Validators must be connected to private telemetry
-Validators have a commission of no more than 15 percent
-Validators have separate stash and controller wallets
-All nodes must update to the latest version within 12 hours of release if marked as "critical" or "high" priority, and 24 hours if marked as "medium" or "low" priority
-Minimum one week of stable validator operation (closer to the end of the week the node will appear in the leaderboard)
-To earn points you need to vote and claim rewards
-Nomination
-nomination is given for 4 eras (1 era 6 hours)
-for an era with 15 percent should be about 0.1 KSM. Sometimes more sometimes less. If the validator becomes a Para validator (this is chosen randomly), then for the era there may be a larger reward
-at first they can nominate more often, but from the second month it will be about once a week
-per month from 1 node is approximately 1 to 1.5 KSM
-Up to two nodes can be connected to one validator, but in practice there is a hidden setting that the 2 subnodes will receive a nomination, but without its own additional stake, it will not be enough for the active set
-Inclusion
-Span-inclusion (inclusion coverage) the earlier the nomination, the more points
-Discovered (Node launch time) the earlier the preferable
-Nominated (nomination time) the longer there was no nomination, the higher the score
-Rank (successful completion of each validation process) the more successful completions, the better
-Unclaimed (mint rewards) just do not forget to claim rewards
-Bonded ()
-Faults (errors) the less, the better
-Offline (Offline) the less, the better
-Example of score changes
-Show Image
+
+Guide on how to install a Kusama node.
+
+## Steps to Take Action:
+
+1. **Run a Node**: Set up and run your Kusama node.
+2. **Verify the Main Wallet**: You need to verify the main wallet that will stash through the registrar. This requires locking an additional 0.33 KSM.
+3. **Synchronize and Stake**: Wait for synchronization and stake at least 10 coins from your stash. Ensure the commission is no more than 15%. Use a separate wallet for the controller.
+4. **Fill Out the Form**: Complete the required form and wait at least 6 days before appearing in official and unofficial leaderboards. Nominations should begin after 7 days.
+
+## Requirements:
+
+- Validators should never be slashed.
+- Cannot be hosted on Hetzner or Contabo.
+- Validators must have a verified wallet account. Refer to [this video](<link-to-the-video>) for guidance.
+- Validators must have their own stake of at least 10 KSM.
+- Validators must be connected to private telemetry.
+- Validators should have a commission of no more than 15 percent.
+- Validators must have separate stash and controller wallets.
+- All nodes must update to the latest version within 12 hours of release if marked as "critical" or "high" priority, and 24 hours if marked as "medium" or "low" priority.
+- A minimum of one week of stable validator operation is required (your node will appear in the leaderboard closer to the end of the week).
+- To earn points, you need to vote and claim rewards.
+
+## Nomination:
+
+- Nomination is given for 4 eras (1 era = 6 hours).
+- For an era with 15 percent commission, the reward should be about 0.1 KSM (this can vary).
+- Validators may receive more frequent nominations initially, but this will likely reduce to about once a week from the second month onwards.
+- Expect to earn approximately 1 to 1.5 KSM per month from one node.
+- Up to two nodes can be connected to one validator. However, without its own additional stake, the second subnode may not receive enough for the active set.
+
+## Scoring:
+
+- **Span-inclusion (Inclusion Coverage)**: Earlier nominations score more points.
+- **Discovered (Node Launch Time)**: Earlier is preferable.
+- **Nominated (Nomination Time)**: The longer since the last nomination, the higher the score.
+- **Rank (Successful Validation Completion)**: More successful completions lead to a better score.
+- **Unclaimed (Mint Rewards)**: Don't forget to claim rewards.
+- **Bonded**: TBD
+- **Faults (Errors)**: Fewer is better.
+- **Offline**: Being online is crucial; less offline time is better.
 
 Used ports
-Copy code
 
 # for the first node
 ```bash
@@ -101,7 +107,7 @@ parity/polkadot --base-path /data --chain kusama \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 1' \
 --telemetry-url 'wss://telemetry-backend.w3f.community/submit 1'
 ```
-Now the node should appear in telemetry - https://telemetry.w3f.community/list/0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe
+Now the node should appear in telemetry - https://telemetry.w3f.community/
 
 Configuring the validator
 After the node is synchronized, we extract the key from our node by entering the command. If the node is not on the standard ports, then change the RPC port at the end of the command

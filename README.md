@@ -38,44 +38,55 @@ Used ports
 Copy code
 
 # for the first node
+```bash
 --port 30333 \ #RPC   
 --ws-port 9944 \
 --rpc-port 9933 \ 
 --prometheus-port 9615 \ #Prometeus
-
+```
 # for the SECOND node  
+```bash
 --port 30533 \ #RPC
 --ws-port 9954 \   
 --rpc-port 9953 \
 --prometheus-port 9655 \ #Prometeus
+```
 Server preparation
 Copy code
 
 # update repositories  
+```bash
 apt update && apt upgrade -y
-
+```
 # install required utilities 
+```bash
 apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
+```
 Install Docker:
 
 Copy code
-
+```bash
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/installers/docker.sh)
+```
 New node installation
 IMPORTANT - in the commands below, replace everything in <> with your own value and remove the <> themselves
 
 Copy code
 
 # create directory
+```bash
 mkdir -p $HOME/.kusama  
-
+```
 # give the right permissions
+```bash
 chown -R $(id -u):$(id -g) $HOME/.kusama
-
+```
 # open used ports. It also works without opening ports   
-#ufw allow 30533
-
+```bash
+ufw allow 30533
+```
 # run docker, pre-specifying the validator name <moniker>
+```bash
 docker run -dit \
 --name kusama_node \ 
 --restart always \  
@@ -89,6 +100,7 @@ parity/polkadot --base-path /data --chain kusama \
 --prometheus-port 9655 \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 1' \
 --telemetry-url 'wss://telemetry-backend.w3f.community/submit 1'
+```
 Now the node should appear in telemetry - https://telemetry.w3f.community/list/0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe
 
 Configuring the validator
@@ -97,14 +109,18 @@ After the node is synchronized, we extract the key from our node by entering the
 Copy code
 
 # below is a command with a non-standard RPC port  
+```bash
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9953
+```
 If you got a similar result, then everything is great
 {"jsonrpc":"2.0","result":"0xa0very0long0hex0string","id":1} - copy the key (highlighted in bold), we will need it soon
 
 Copy code
 
 # check if keys were created   
+```bash
 ls -a $HOME/.kusama/chains/ksmcc3/keystore/
+```
 Don't forget to save the keys!!!
 
 Go to the site and select Network - Staking - Accounts - Validator
@@ -115,8 +131,9 @@ Moving the validator
 Start the node on the new server as usual and fully synchronize
 After synchronization on the new server, run the command and copy the new key
 Copy code
-
+```bash
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://localhost:9953
+```
 Go to Network - Accounts - Change session keys and change our key. Sign the transaction
 Wait for the end of the era
 After the end of the era, stop the old node
@@ -124,16 +141,21 @@ Updating (Manually)
 Copy code
 
 # update image
+```bash
 docker pull parity/polkadot
-
+```
 # stop node
+```bash
 docker stop kusama_node
-
+```
 # delete container 
+```bash
 docker rm kusama_node
+```
 Copy code
 
 # run docker, pre-specifying the validator name <moniker>
+```bash
 docker run -dit \  
 --name kusama_node \
 --restart always \ 
@@ -147,6 +169,7 @@ parity/polkadot --base-path /data --chain kusama \
 --prometheus-port 9655 \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 1' \
 --telemetry-url 'wss://telemetry-backend.w3f.community/submit 1'
+```
 Updating (Auto)
 Snapshot
 
@@ -155,24 +178,28 @@ https://polkachu.com/snapshots/kusama
 Copy code
 
 # снепшот от полкачу
-
+```bash
 docker stop kusama_node
-
+```
+```bash
 docker rm kusama_node
-
-
+```
+```bash
 curl -o - -L https://snapshots.polkachu.com/snapshots/kusama/kusama_16151324.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.kusama/chains/ksmcc3/
-
+```
 
 # запускаем
 Useful commands
 Copy code
 
 # view logs
+```bash
 docker logs kusama_node -fn 100  
-
+```
 # restart node
+```bash
 docker restart kusama_node
+```
 Leaderboards
 https://vegas1kv.com/
 
@@ -194,12 +221,13 @@ https://kusama.polkastats.io/validator/DwZmVxujvVZmzmLZJ3wNTqyxBYTPDstCxayK6nwSR
 
 Deleting a node
 Copy code
-
+```bash
 docker stop kusama_node
-
+```
+```bash
 docker rm kusama_node
-
-
+```
+```bash
 cd $HOME   
-
 rm -rf .kusama/
+```

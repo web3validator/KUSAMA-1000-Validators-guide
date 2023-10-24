@@ -99,7 +99,7 @@ docker run -dit \
 --network host \
 -v $HOME/.kusama:/data -u $(id -u ${USER}):$(id -g ${USER}) \
 parity/polkadot --base-path /data --chain kusama \   
---validator --name "<moniker>" \ 
+--validator --name "web34ever-2" \ 
 --port 30533 \
 --ws-port 9954 \
 --rpc-port 9953 \
